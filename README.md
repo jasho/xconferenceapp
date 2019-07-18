@@ -1,2 +1,2 @@
-# xconferenceapp
+# XConferenceApp
 Sample Conference App
