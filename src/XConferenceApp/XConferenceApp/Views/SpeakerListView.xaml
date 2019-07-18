@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="XConferenceApp.Views.SpeakerListView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:dl="clr-namespace:XConferenceApp.DesignLocators;assembly=XConferenceApp"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:XConferenceApp.Controls;assembly=XConferenceApp"
+             mc:Ignorable="d"
+             BindingContext="{x:Static dl:ViewModelLocator.SpeakerListViewModel}">
+    <Shell.SearchHandler>
+        <controls:SpeakerSearchHandler x:Name="SpeakerSearchHandler"
+                               Placeholder="Vyhledávání"
+                               ShowsResults="False">
+            <SearchHandler.ItemTemplate>
+                <DataTemplate>
+                    <ContentView/>
+                </DataTemplate>
+            </SearchHandler.ItemTemplate>
+        </controls:SpeakerSearchHandler>
+    </Shell.SearchHandler>
+    <Grid x:Name="Root" BackgroundColor="{StaticResource BackgroundColor}">
+        <CollectionView ItemsSource="{Binding Source={x:Reference Name=SpeakerSearchHandler}, Path=ItemsSource}"
+                        ItemSizingStrategy="MeasureAllItems"
+                        BackgroundColor="{StaticResource BackgroundColor}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Span="2" Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <ContentView BindingContext="{x:Static dl:ModelLocator.SpeakerModel}">
+                        <Grid BackgroundColor="{StaticResource AccentColor}"
+                              Margin="{StaticResource DefaultMarginThickness}"
+                              Padding="{StaticResource DefaultMarginThickness}">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference Name=Root}, Path=BindingContext.GoToDetailCommand}"
+                                                      CommandParameter="{Binding Id}"/>
+                            </Grid.GestureRecognizers>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0"
+                                   HeightRequest="40"
+                                   HorizontalOptions="Center"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource BackgroundColor}"
+                                   Text="{Binding FullName}"
+                                   HorizontalTextAlignment="Center"/>
+                            <Image Grid.Row="1"
+                                   HeightRequest="100"
+                                   WidthRequest="100"
+                                   HorizontalOptions="Center"
+                                   Source="{Binding PhotoUrl}"/>
+                        </Grid>
+                    </ContentView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

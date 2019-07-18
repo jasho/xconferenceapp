@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="XConferenceApp.Resources.Styles">
+    <Color x:Key="BackgroundColor">#2C2D2B</Color>
+    <Color x:Key="AccentColor">#E59D00</Color>
+    <Color x:Key="DisabledColor">#BABABA</Color>
+    <Color x:Key="TextColorLight">#DDDDDD</Color>
+
+    <x:Double x:Key="DefaultMargin">16</x:Double>
+    <x:Double x:Key="2xDefaultMargin">32</x:Double>
+
+    <Thickness x:Key="DefaultMarginThickness"
+               Left="{StaticResource DefaultMargin}"
+               Top="{StaticResource DefaultMargin}"
+               Right="{StaticResource DefaultMargin}"
+               Bottom="{StaticResource DefaultMargin}"/>
+</ResourceDictionary>

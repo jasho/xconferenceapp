@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:dl="clr-namespace:XConferenceApp.DesignLocators;assembly=XConferenceApp"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="XConferenceApp.Views.ContactView"
+             Title="Kontakt"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             Shell.TitleColor="{StaticResource BackgroundColor}"
+             Shell.ForegroundColor="{StaticResource BackgroundColor}"
+             Shell.BackgroundColor="{StaticResource AccentColor}"
+             BindingContext="{x:Static dl:ViewModelLocator.ContactViewModel}">
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource AccentColor}"/>
+            <Setter Property="FontSize" Value="Medium"/>
+        </Style>
+        <Style TargetType="Entry">
+            <Setter Property="TextColor" Value="{StaticResource BackgroundColor}"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource TextColorLight}"/>
+        </Style>
+        <Style TargetType="Editor">
+            <Setter Property="TextColor" Value="{StaticResource BackgroundColor}"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource TextColorLight}"/>
+        </Style>
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Text="Jméno a příjmení *"/>
+        <Entry Grid.Row="1" Text="{Binding ContactInfo.Name}"/>
+        <Label Grid.Row="2" Text="E-mailová adresa *"/>
+        <Entry Grid.Row="3" Text="{Binding ContactInfo.Email}"/>
+        <Label Grid.Row="4" Text="Text zprávy *"/>
+        <Editor Grid.Row="5" Text="{Binding ContactInfo.Text}"/>
+        <Label Grid.Row="6" Text="{Binding ContactInfoSentMessage}"/>
+        <Button Grid.Row="7"
+                Text="Odeslat"
+                Command="{Binding SendContactInfoCommand}"
+                TextColor="{StaticResource BackgroundColor}"
+                BackgroundColor="{StaticResource AccentColor}"/>
+    </Grid>
+</ContentPage>

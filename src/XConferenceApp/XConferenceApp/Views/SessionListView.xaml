@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="XConferenceApp.Views.SessionListView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:dl="clr-namespace:XConferenceApp.DesignLocators;assembly=XConferenceApp"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:fonts="clr-namespace:XConferenceApp.Fonts;assembly=XConferenceApp"
+             mc:Ignorable="d"
+             Title="Program"
+             Shell.TitleColor="{StaticResource BackgroundColor}"
+             Shell.ForegroundColor="{StaticResource BackgroundColor}"
+             Shell.BackgroundColor="{Binding Room.AccentColor}"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             BindingContext="{x:Static dl:ViewModelLocator.SessionListViewModel}">
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="{Binding Source={x:Reference Root}, Path=BindingContext.Room.AccentColor}"/>
+        </Style>
+    </ContentPage.Resources>
+    <Grid x:Name="Root">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <CollectionView ItemsSource="{Binding Sessions}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="{StaticResource DefaultMarginThickness}"
+                          BindingContext="{x:Static dl:ModelLocator.SessionModel}">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference Name=Root}, Path=BindingContext.GoToDetailCommand}"
+                                                  CommandParameter="{Binding Id}"/>
+                        </Grid.GestureRecognizers>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+                        <BoxView Grid.Row="0"
+                                 Grid.RowSpan="2"
+                                 Grid.Column="0"
+                                 VerticalOptions="Fill"
+                                 WidthRequest="5"
+                                 BackgroundColor="{Binding Source={x:Reference Root}, Path=BindingContext.Room.AccentColor}"/>
+                        <Label Grid.Row="0"
+                               Grid.Column="1"
+                               Text="{Binding Title}"
+                               FontAttributes="Bold"/>
+                        <Label Grid.Row="0"
+                               Grid.RowSpan="2"
+                               Grid.Column="2"
+                               Text="{x:Static fonts:FontAwesome5Solid.ArrowRight}"
+                               FontFamily="{StaticResource FontAwesomeSolid}"/>
+                        <StackLayout Grid.Row="1"
+                                     Grid.Column="1"
+                                     Orientation="Horizontal">
+                            <Label HorizontalOptions="Start"
+                                   Text="{Binding TimeStart, StringFormat='{0:HH:mm}'}"/>
+                            <Label Text="-"/>
+                            <Label Text="{Binding TimeEnd, StringFormat='{0:HH:mm}'}"/>
+                        </StackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters="clr-namespace:XConferenceApp.Converters"
+             xmlns:viewModels="clr-namespace:XConferenceApp.ViewModels"
+             mc:Ignorable="d"
+             x:Class="XConferenceApp.App">
+    <Application.Resources>
+        <ResourceDictionary Source="Resources/Styles.xaml"/>
+
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String"
+              x:Key="FontAwesomeBrands">
+                <On Platform="Android"
+        Value="FontAwesome5Brands.otf#Regular" />
+                <On Platform="iOS"
+        Value="FontAwesome5Brands-Regular" />
+                <On Platform="UWP"
+        Value="/Assets/FontAwesome5Brands.otf#Font Awesome 5 Brands" />
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String"
+              x:Key="FontAwesomeSolid">
+                <On Platform="Android"
+        Value="FontAwesome5Solid.otf#Regular" />
+                <On Platform="iOS"
+        Value="FontAwesome5Free-Solid" />
+                <On Platform="UWP"
+        Value="/Assets/FontAwesome5Solid.otf#Font Awesome 5 Free" />
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String"
+              x:Key="FontAwesomeRegular">
+                <On Platform="Android"
+        Value="FontAwesome5Regular.otf#Regular" />
+                <On Platform="iOS"
+        Value="FontAwesome5Free-Regular" />
+                <On Platform="UWP"
+        Value="/Assets/FontAwesome5Regular.otf#Font Awesome 5 Free" />
+            </OnPlatform>
+        </ResourceDictionary>
+
+        <converters:BoolToShellItemTemplateTextColorConverter x:Key="BoolToShellItemTemplateTextColorConverter"/>
+        <converters:BoolToShellItemTemplateBackgroundColorConverter x:Key="BoolToShellItemTemplateBackgroundColorConverter"/>
+        <converters:NullToVisibleConverter x:Key="NullToVisibleConverter"/>
+        <viewModels:SpeakerListViewModel x:Key="SpeakerListViewModel"/>
+    </Application.Resources>
+</Application>

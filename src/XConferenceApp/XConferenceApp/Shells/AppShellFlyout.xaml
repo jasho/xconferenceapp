@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="clr-namespace:XConferenceApp.Views"
+             xmlns:fonts="clr-namespace:XConferenceApp.Fonts;assembly=XConferenceApp"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
+             xmlns:dl="clr-namespace:XConferenceApp.DesignLocators;assembly=XConferenceApp"
+             mc:Ignorable="d"
+             x:Class="XConferenceApp.Shells.AppShellFlyout"
+             FlyoutBackgroundColor="{StaticResource BackgroundColor}">
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style TargetType="ShellItem"
+                   ApplyToDerivedTypes="True">
+                <Setter Property="Shell.BackgroundColor"
+                        Value="{StaticResource BackgroundColor}" />
+                <Setter Property="Shell.TabBarBackgroundColor"
+                        Value="{StaticResource BackgroundColor}"/>
+                <Setter Property="Shell.FlyoutBackgroundColor"
+                        Value="{StaticResource BackgroundColor}"/>
+                <Setter Property="Shell.ForegroundColor"
+                        Value="{StaticResource AccentColor}" />
+                <Setter Property="Shell.TitleColor"
+                        Value="{StaticResource AccentColor}" />
+                <Setter Property="Shell.TabBarTitleColor"
+                        Value="{StaticResource AccentColor}" />
+                <Setter Property="Shell.TabBarForegroundColor"
+                        Value="{StaticResource AccentColor}" />
+                <Setter Property="Shell.DisabledColor"
+                        Value="{StaticResource DisabledColor}" />
+            </Style>
+        </ResourceDictionary>
+    </Shell.Resources>
+    <Shell.FlyoutHeader>
+        <Grid Padding="{StaticResource DefaultMarginThickness}">
+            <Image HorizontalOptions="Start"
+                   HeightRequest="30"
+                   Source="menuicon.png"/>
+        </Grid>
+    </Shell.FlyoutHeader>
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid HeightRequest="{StaticResource 2xDefaultMargin}" BindingContext="{x:Static dl:ControlLocator.FlyoutItem}">
+                <Grid.Padding>
+                    <Thickness
+                        Left="{StaticResource 2xDefaultMargin}"
+                        Top="{StaticResource DefaultMargin}" />
+                </Grid.Padding>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="{Binding Icon}"
+                       WidthRequest="40"
+                       HeightRequest="40"/>
+                <Label Grid.Column="1"
+                       Text="{Binding Title}"
+                       TextColor="{Binding IsChecked, Converter={StaticResource BoolToShellItemTemplateTextColorConverter}}"
+                       BackgroundColor="{Binding IsChecked, Converter={StaticResource BoolToShellItemTemplateBackgroundColorConverter}}"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+    <ShellItem Title="Přednášející" Route="speakers">
+        <ShellItem.Icon>
+            <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}"
+                             Glyph="{x:Static fonts:FontAwesome5Solid.Users}"
+                             Size="50"
+                             Color="{StaticResource AccentColor}"/>
+        </ShellItem.Icon>
+        <ShellSection Route="section">
+            <ShellContent ContentTemplate="{DataTemplate TypeName=views:SpeakerListView}"
+                          Route="list"/>
+        </ShellSection>
+    </ShellItem>
+    <!--<ShellContent Title="Přednášející"
+                  ContentTemplate="{DataTemplate TypeName=views:SpeakerListView}">
+        <ShellContent.Icon>
+            <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}"
+                             Glyph="{x:Static fonts:FontAwesome5Solid.Users}"
+                             Size="50"
+                             Color="{StaticResource AccentColor}"/>
+        </ShellContent.Icon>
+    </ShellContent>-->
+    <FlyoutItem Title="Program">
+        <FlyoutItem.Icon>
+            <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}"
+                             Glyph="{x:Static fonts:FontAwesome5Solid.CalendarAlt}"
+                             Size="50"
+                             Color="{StaticResource AccentColor}"/>
+        </FlyoutItem.Icon>
+        <Tab Title="DEN 1">
+            <ShellContent Title="HALL A">
+                <views:SessionListView>
+                    <x:Arguments>
+                        <sys:DateTime>2018,11,22</sys:DateTime>
+                        <x:Int32>1</x:Int32>
+                    </x:Arguments>
+                </views:SessionListView>
+            </ShellContent>
+            <ShellContent Title="HALL B">
+                <views:SessionListView>
+                    <x:Arguments>
+                        <sys:DateTime>2018,11,22</sys:DateTime>
+                        <x:Int32>2</x:Int32>
+                    </x:Arguments>
+                </views:SessionListView>
+            </ShellContent>
+            <ShellContent Title="HALL C">
+                <views:SessionListView>
+                    <x:Arguments>
+                        <sys:DateTime>2018,11,22</sys:DateTime>
+                        <x:Int32>3</x:Int32>
+                    </x:Arguments>
+                </views:SessionListView>
+            </ShellContent>
+        </Tab>
+        <Tab Title="DEN 2">
+            <ShellContent Title="HALL A">
+                <views:SessionListView>
+                    <x:Arguments>
+                        <sys:DateTime>2018,11,23</sys:DateTime>
+                        <x:Int32>1</x:Int32>
+                    </x:Arguments>
+                </views:SessionListView>
+            </ShellContent>
+            <ShellContent Title="HALL B">
+                <views:SessionListView>
+                    <x:Arguments>
+                        <sys:DateTime>2018,11,23</sys:DateTime>
+                        <x:Int32>2</x:Int32>
+                    </x:Arguments>
+                </views:SessionListView>
+            </ShellContent>
+            <ShellContent Title="HALL C">
+                <views:SessionListView>
+                    <x:Arguments>
+                        <sys:DateTime>2018,11,23</sys:DateTime>
+                        <x:Int32>3</x:Int32>
+                    </x:Arguments>
+                </views:SessionListView>
+            </ShellContent>
+        </Tab>
+    </FlyoutItem>
+
+    <ShellItem Title="Kontakt">
+        <ShellItem.Icon>
+            <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}"
+                             Glyph="{x:Static fonts:FontAwesome5Solid.Edit}"
+                             Size="50"
+                             Color="{StaticResource AccentColor}"/>
+        </ShellItem.Icon>
+        <ShellSection>
+            <ShellContent ContentTemplate="{DataTemplate TypeName=views:ContactView}">
+            </ShellContent>
+        </ShellSection>
+    </ShellItem>
+
+    <!--<ShellContent Title="Kontakt"
+                  ContentTemplate="{DataTemplate TypeName=views:ContactView}">
+        <ShellContent.Icon>
+            <FontImageSource FontFamily="{StaticResource FontAwesomeSolid}"
+                             Glyph="{x:Static fonts:FontAwesome5Solid.Edit}"
+                             Size="50"
+                             Color="{StaticResource AccentColor}"/>
+        </ShellContent.Icon>
+    </ShellContent>-->
+</Shell>
